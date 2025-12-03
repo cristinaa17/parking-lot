@@ -2,6 +2,8 @@ package org.parking.parkinglot;
 
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.HttpConstraint;
+import jakarta.servlet.annotation.ServletSecurity;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,8 +15,10 @@ import org.ejb.UserBean;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name ="AddCar", value = "/AddCar")
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"WRITE_CARS"}))
+@WebServlet(name = "AddCar", value = "/AddCar")
 public class AddCar extends HttpServlet {
+
     @Inject
     UserBean usersBean;
 
@@ -22,21 +26,26 @@ public class AddCar extends HttpServlet {
     CarsBean carsBean;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         List<UserDto> users = usersBean.findAllUsers();
-        request.setAttribute("users",users);
-        request.getRequestDispatcher("/WEB-INF/pages/addCar.jsp").forward(request,response);
+        request.setAttribute("users", users);
+
+        request.getRequestDispatcher("/WEB-INF/pages/addCar.jsp")
+                .forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String licensePlate = request.getParameter("license_plate");
         String parkingSpot = request.getParameter("parking_spot");
         Long userId = Long.parseLong(request.getParameter("owner_id"));
 
-        carsBean.createCar(licensePlate,parkingSpot,userId);
+        carsBean.createCar(licensePlate, parkingSpot, userId);
 
         response.sendRedirect(request.getContextPath() + "/Cars");
     }
 }
-
