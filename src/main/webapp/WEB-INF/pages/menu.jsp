@@ -39,7 +39,7 @@
                             </c:otherwise>
                         </c:choose>
                     </li>
-                </ul>
+               </ul>
             </div>
         </div>
 

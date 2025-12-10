@@ -9,7 +9,7 @@
     </deployment>
     <server-settings>
       <option name="DOMAIN" value="domain1" />
-      <option name="PRESERVE" value="false" />
+      <option name="PRESERVE" value="true" />
       <option name="COMPATIBILITY" value="false" />
       <option name="VIRTUAL_SERVER" />
       <option name="USERNAME" value="admin" />
