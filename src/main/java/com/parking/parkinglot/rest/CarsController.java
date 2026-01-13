@@ -1,4 +1,4 @@
-package rest;
+package com.parking.parkinglot.rest;
 
 import com.parking.parkinglot.common.CarDto;
 import com.parking.parkinglot.ejb.CarsBean;

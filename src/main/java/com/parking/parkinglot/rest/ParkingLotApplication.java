@@ -1,4 +1,4 @@
-package rest;
+package com.parking.parkinglot.rest;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
