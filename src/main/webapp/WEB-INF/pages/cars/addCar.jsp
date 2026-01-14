@@ -22,6 +22,11 @@
 
                 <div class="col-12 mb-3">
                     <label for="parking_spot" class="form-label">Parking spot</label>
+                    <c:if test="parkingspot >= 1 && parkingSpot <= 10">
+                        <div class="invalid-feedback">
+                            Parking spots reserved.
+                        </div>
+                    </c:if>
                     <input type="text" class="form-control" id="parking_spot"
                            name="parking_spot" required>
                     <div class="invalid-feedback">

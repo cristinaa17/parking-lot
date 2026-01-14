@@ -5,16 +5,21 @@ import com.parking.parkinglot.common.CarPhotoDto;
 import com.parking.parkinglot.entities.Car;
 import com.parking.parkinglot.entities.CarPhoto;
 import com.parking.parkinglot.entities.User;
+import com.parking.parkinglot.servlets.cars.Cars;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import java.util.*;
 import java.util.logging.Logger;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 
 @Stateless
 public class CarsBean {
@@ -47,6 +52,13 @@ public class CarsBean {
 
         List<Car> list = new ArrayList<>();
         list.add(car);
+        Comparator<Car> carNameComparator = new Comparator<Car>() {
+            @Override
+            public int compare(Car car1, Car car2) {
+                return car1.owner.compareTo(car2.owner);
+            }
+        };
+        Collections.sort(list, carNameComparator);
 
         return copyCarsToDto(list).get(0);
     }

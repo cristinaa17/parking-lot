@@ -1,8 +1,10 @@
 package com.parking.parkinglot.ejb;
 
 import com.parking.parkinglot.common.UserDto;
+import com.parking.parkinglot.entities.Car;
 import com.parking.parkinglot.entities.User;
 import com.parking.parkinglot.entities.UserGroup;
+import com.parking.parkinglot.servlets.users.Users;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
@@ -10,9 +12,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 @Stateless
